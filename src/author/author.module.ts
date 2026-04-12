@@ -1,0 +1,13 @@
+import { Module } from '@nestjs/common';
+import { AuthorController } from './author.controller';
+import { AuthorService } from './providers/author.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Author } from './entity/author.entity';
+
+@Module({
+  imports: [TypeOrmModule.forFeature([Author])],
+  controllers: [AuthorController],
+  providers: [AuthorService],
+  exports: [TypeOrmModule, AuthorService]
+})
+export class AuthorModule {}

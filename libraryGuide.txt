@@ -1,0 +1,52 @@
+Install NestJS CLI
+>npm install -g @nestjs/cli
+
+chek version
+>nest --version
+
+Create a New Project
+>nest new library-management
+
+Generate Modules
+>nest generate module member
+>nest generate module book
+>nest generate module author
+>nest generate module borrowing
+>nest generate module membership-card
+
+Generate Controllers
+>nest generate controller member --no-spec
+>nest generate controller book --no-spec
+>nest generate controller author --no-spec
+>nest generate controller borrowing --no-spec
+>nest generate controller membership-card --no-spec
+
+Generate Service 
+>nest generate service member/providers/member --flat --no-spec
+>nest generate service book/providers/book --flat --no-spec
+>nest generate service author/providers/author --flat --no-spec
+>nest generate service borrowing/providers/borrowing --flat --no-spec
+>nest generate service membership-card/providers/membership-card --flat --no-spec
+
+class validator
+npm i class-validator@0.14.1
+npm i class-transformer@0.5.1
+npm i @nestjs/mapped-types@2.0.5
+
+Api & Code Documentation
+
+Installation
+>npm i @nestjs/swagger@7.3.0
+
+
+>npm i @compodoc/compodoc@1.1.23
+scripts: {
+	"doc": "npx @compodoc/compodoc -p tsconfig.json -s --port 3001 --watch -d ./documentation"
+}
+
+
+psql --version
+
+>npm i typeorm@0.3.20
+>npm i @nestjs/typeorm@10.0.2
+>npm i pg@8.11.5
