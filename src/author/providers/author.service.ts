@@ -1,8 +1,10 @@
-import {  Injectable } from '@nestjs/common';
+import {  BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Author } from '../entity/author.entity';
 import { CreateAuthorDto } from '../dto/create_author.dto';
+import { catchError } from 'rxjs';
+import { ExceptionsHandler } from '@nestjs/core/exceptions/exceptions-handler';
 
 @Injectable()
 export class AuthorService {
@@ -10,17 +12,33 @@ export class AuthorService {
         @InjectRepository(Author)
         private readonly authorRepository : Repository<Author> 
     ){}
-
+    
     async createAuthor(authorDto: CreateAuthorDto ): Promise<Author>{
-        let author = this.authorRepository.create(authorDto);
-        return await this.authorRepository.save(author);
+        try {
+            let author = this.authorRepository.create(authorDto);
+            return await this.authorRepository.save(author);
+        } catch (error) {
+            throw new BadRequestException("Failed to craete an author");
+        }
+        
     }
 
     async allAuthor() : Promise<Author[]> {
-        return this.authorRepository.find();
+            let allAuthor = this.authorRepository.find();
+            if(!allAuthor){
+                throw new NotFoundException("Author not found");
+            } else {
+                return allAuthor;
+            }
+            
     }
 
     async findAuthorById(id: number): Promise<Author>{
-        return await this.authorRepository.findOne({where : {id}})
+        const author_id = this.authorRepository.findOne({where : {id}})
+        if(!author_id) {
+            throw new NotFoundException("Author is not found by this id");
+        } else {
+            return author_id;
+        }
     }
 }
