@@ -3,8 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Author } from '../entity/author.entity';
 import { CreateAuthorDto } from '../dto/create_author.dto';
-import { catchError } from 'rxjs';
-import { ExceptionsHandler } from '@nestjs/core/exceptions/exceptions-handler';
+
 
 @Injectable()
 export class AuthorService {
@@ -24,17 +23,16 @@ export class AuthorService {
     }
 
     async allAuthor() : Promise<Author[]> {
-            let allAuthor = this.authorRepository.find();
-            if(!allAuthor){
+            let allAuthor = await this.authorRepository.find();
+            if(allAuthor.length === 0){
                 throw new NotFoundException("Author not found");
             } else {
                 return allAuthor;
-            }
-            
+            }      
     }
 
     async findAuthorById(id: number): Promise<Author>{
-        const author_id = this.authorRepository.findOne({where : {id}})
+        const author_id = await this.authorRepository.findOne({where : {id}})
         if(!author_id) {
             throw new NotFoundException("Author is not found by this id");
         } else {

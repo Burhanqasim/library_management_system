@@ -1,8 +1,9 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { MemberService } from './providers/member.service';
 import { stringify } from 'querystring';
-import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Members')
 @Controller('member')
 export class MemberController {
     constructor(private readonly memberService: MemberService){}

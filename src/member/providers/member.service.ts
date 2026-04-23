@@ -26,11 +26,11 @@ export class MemberService {
 
     // find member by using get
     async allmember(): Promise<Member[]>{
-        return await this.memberRepository.find({relations: ['membershipCard']});
+        return await this.memberRepository.find();
     }
 
     async findoneMember(id: number): Promise<Member> {
-        return await this.memberRepository.findOne({where: {id}, relations: ['membershipCard']})
+        return await this.memberRepository.findOne({where: {id}})
     }
 
 
