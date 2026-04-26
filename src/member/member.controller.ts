@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { MemberService } from './providers/member.service';
 import { stringify } from 'querystring';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { GetMemberDto } from './dto/get_member.dto';
 
 @ApiTags('Members')
 @Controller('member')
@@ -13,8 +14,8 @@ export class MemberController {
     }
 
     @Get()
-    getallmember(){
-        return this.memberService.allmember();
+    getallmember(@Query() getMemberDto : GetMemberDto){
+        return this.memberService.allmember(getMemberDto);
     }
 
     @Post()

@@ -8,6 +8,7 @@ import { MembershipCardModule } from './membership-card/membership-card.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BorrowingModule } from './borrowing/borrowing.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { PaginationModule } from './common/pagination/pagination.module';
 import appConfig from './config/app.config';
 import dbConfig from './config/db.config';
 
@@ -33,6 +34,7 @@ import dbConfig from './config/db.config';
         database: configService.get("database.database"),
       })
     }),
+    PaginationModule,
     
   ],
   controllers: [AppController],

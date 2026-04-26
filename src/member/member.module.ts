@@ -6,6 +6,7 @@ import { Member } from './entity/member.entity';
 import { MembershipCardModule } from 'src/membership-card/membership-card.module';
 import { MembershipCard } from 'src/membership-card/entity/membership_card.entity';
 import { BorrowingModule } from 'src/borrowing/borrowing.module';
+import { PaginationModule } from 'src/common/pagination/pagination.module';
 
 @Module({
   controllers: [MemberController],
@@ -13,7 +14,8 @@ import { BorrowingModule } from 'src/borrowing/borrowing.module';
   imports : [
     TypeOrmModule.forFeature([Member, MembershipCard]), 
   MembershipCardModule, 
-  BorrowingModule 
+  BorrowingModule,
+  PaginationModule,
 ]
 })
 export class MemberModule {}
